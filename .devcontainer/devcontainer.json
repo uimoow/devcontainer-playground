@@ -1,0 +1,4 @@
+{
+    "name": "playground-min",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu"
+}
