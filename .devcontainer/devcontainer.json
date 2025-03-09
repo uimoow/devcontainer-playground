@@ -1,4 +1,6 @@
 {
-    "name": "playground-min",
-    "image": "mcr.microsoft.com/devcontainers/python:latest"
+    "name": "playground-dockerfile",
+    "build": {
+        "dockerfile": "./Dockerfile"
+      }
 }
