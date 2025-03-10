@@ -1,2 +1,1 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
-CMD ["bash"]
+FROM mcr.microsoft.com/devcontainers/python:latest
