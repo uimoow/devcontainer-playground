@@ -1,6 +1,24 @@
 {
-    "name": "playground-dockerfile",
+    "name": "playground-flask",
     "build": {
-        "dockerfile": "./Dockerfile"
-      }
+        "dockerfile": "./Dockerfile",
+        "context": ".."
+      },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "ms-python.python",
+                "flask.flask-snippets",
+                "littlefoxteam.vscode-python-test-adapter",
+                "ms-python.vscode-pylance",
+                "esbenp.prettier-vscode"
+              ]
+        }
+    },
+    "forwardPorts": [5000],
+    "postCreateCommand": "pip install -r /workspaces/${localWorkspaceFolderBasename}/requirements.txt",
+    "remoteUser": "vscode"
 }
