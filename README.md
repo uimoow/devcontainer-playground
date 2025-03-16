@@ -2,7 +2,7 @@
 
 1. Open the terminal inside the container and run:
     ```bash
-    flask run
+    flask run --host=0.0.0.0
     ```
 
 2. Open a browser and go to http://localhost:5000 to see "Hello, World!".

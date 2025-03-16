@@ -8,4 +8,4 @@ def client():
 
 def test_hello_world(client):
     rv = client.get('/')
-    assert rv.data == b'Hello, World!'
+    assert rv.data == b'Hello, World with MySQL!'
