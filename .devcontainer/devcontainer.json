@@ -1,9 +1,10 @@
 {
-    "name": "playground-flask",
-    "build": {
-        "dockerfile": "./Dockerfile",
-        "context": ".."
-      },
+    "name": "playground-flask-mysql",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "flask-app",
+    "forwardPorts": [5000],
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
     "customizations": {
         "vscode": {
             "settings": {
@@ -17,8 +18,5 @@
                 "esbenp.prettier-vscode"
               ]
         }
-    },
-    "forwardPorts": [5000],
-    "postCreateCommand": "pip install -r /workspaces/${localWorkspaceFolderBasename}/requirements.txt",
-    "remoteUser": "vscode"
+    }
 }
