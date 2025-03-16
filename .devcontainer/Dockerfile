@@ -9,4 +9,3 @@ COPY src/ ./src
 EXPOSE 5000
 ENV FLASK_APP=src/app.py
 ENV FLASK_ENV=development
-CMD ["python", "/workspace/src/app.py"]
