@@ -4,6 +4,8 @@
     "service": "flask-app",
     "forwardPorts": [5000],
     "workspaceFolder": "/workspace",
+    "remoteUser": "vscode",
+    "postCreateCommand": "sudo chown -R vscode:vscode /workspace",
     "shutdownAction": "stopCompose",
     "customizations": {
         "vscode": {

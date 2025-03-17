@@ -6,7 +6,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ..:/workspace
+      - ../src:/workspace/src
     depends_on:
       - flask-db
     command: sleep infinity
