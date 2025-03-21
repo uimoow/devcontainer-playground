@@ -8,7 +8,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ../src:/workspace/src
+      - ../:/workspace
     depends_on:
       - db
     command: sleep infinity
@@ -27,7 +27,7 @@ services:
   db:
     container_name: mysql-db
     image: mysql:8.0
-    restart: always
+    restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
