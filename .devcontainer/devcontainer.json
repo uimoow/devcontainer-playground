@@ -1,7 +1,7 @@
 {
     "name": "playground-flask-mysql",
     "dockerComposeFile": "./docker-compose.yml",
-    "service": "flask-app",
+    "service": "app",
     "forwardPorts": [5000],
     "workspaceFolder": "/workspace",
     "remoteUser": "vscode",

@@ -1,5 +1,7 @@
 services:
-  flask-app:
+  app:
+    container_name: flask-app
+    tty: true
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
@@ -8,7 +10,7 @@ services:
     volumes:
       - ../src:/workspace/src
     depends_on:
-      - flask-db
+      - db
     command: sleep infinity
     environment:
       - FLASK_APP=src/app.py
@@ -17,23 +19,33 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+    env_file:
+      - .env
     networks:
       - backend
 
-  flask-db:
+  db:
+    container_name: mysql-db
     image: mysql:8.0
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - TZ=${DB_TIMEZONE}
+    env_file:
+      - .env
     ports:
         - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
     networks:
       - backend
 
 volumes:
-  db-data: {}
+  db-data:
 
 networks:
   backend:
