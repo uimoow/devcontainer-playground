@@ -1,4 +1,4 @@
-# Dockerfile Optimization
+# Dockerfile Optimization: Steps & Checkpoints
 
 ## 1. How to Optimize Dockerfile
 
@@ -32,10 +32,34 @@ COPY --from=build /app /app
 CMD ["python", "app.py"]
 ```
 
+## 2. Try the Optimized Dockerfile
 
-## 2. How to Check the Optimization Results
+### 2.1 Build Docker Images
+Build the images before and after optimization.
 
-### 2.1 Check Image Size
+```bash
+$ docker build -t flask_app:before -f Dockerfile.before ..
+$ docker build -t flask_app:after -f Dockerfile.after ..
+```
+
+Or, you can build and test images by switching between Git branches.
+
+- Before optimization branch: feature/compose-flask-mysql
+- After optimization branch: feature/flask_mysql_optimize
+
+Example Steps:
+```bash
+$ cd .devcontainer/
+$ git checkout feature/compose-flask-mysql
+$ docker build -t flask_app:before -f Dockerfile ..
+
+$ git checkout feature/flask_mysql_optimize
+$ docker build -t flask_app:after -f Dockerfile ..
+```
+
+## 3. How to Check the Optimization Results
+
+### 3.1 Check Image Size
 
 Use docker images to compare image sizes before and after optimization.
 
@@ -47,7 +71,7 @@ flask_app        before    6d1e104f7809   2025-03-22       1.58GB
 flask_app        after     2e363d04d47b   2025-03-22       331MB
 ```
 
-### 2.2 Check Image Layers
+### 3.2 Check Image Layers
 Use docker inspect and jq to see the layers in the image. Fewer layers usually mean a simpler image.
 
 ```bash
