@@ -3,7 +3,7 @@
     "dockerComposeFile": "./docker-compose.yml",
     "service": "app",
     "forwardPorts": [5000],
-    "workspaceFolder": "/workspace",
+    "workspaceFolder": "/workspace/src",
     "remoteUser": "vscode",
     "shutdownAction": "stopCompose",
     "customizations": {
@@ -15,7 +15,8 @@
                 "ms-python.python",
                 "littlefoxteam.vscode-python-test-adapter",
                 "ms-python.vscode-pylance",
-                "esbenp.prettier-vscode"
+                "esbenp.prettier-vscode",
+                "mhutchie.git-graph"
               ]
         }
     }
