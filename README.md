@@ -61,8 +61,8 @@ Before Sample: 20 layers
   "sha256:01c9a2a5f237...",
   "sha256:f8217d7865d2...",
   "sha256:4b017a36fd9c...",
-  "sha256:d4a8a80ff53d..."
-  ...
+  "sha256:d4a8a80ff53d...",
+  "... more layers ...",
   "sha256:aa903d14fe74..."
 ]
 ```
@@ -72,7 +72,7 @@ After Sample: 9 layers
 [
   "sha256:1287fbecdfcc...",
   "sha256:e2f88fe30c9c...",
-  ...
+  "... more layers ...",
   "sha256:c0fe499df8e8..."
 ]
 ```
