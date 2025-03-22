@@ -1,4 +1,4 @@
-Flask
+flask
 flask-mysqldb
 python-dotenv
 pytest
