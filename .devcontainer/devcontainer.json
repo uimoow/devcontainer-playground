@@ -1,11 +1,10 @@
 {
-    "name": "playground-flask-mysql",
+    "name": "playground-flask-mysql-optimize",
     "dockerComposeFile": "./docker-compose.yml",
     "service": "app",
     "forwardPorts": [5000],
     "workspaceFolder": "/workspace",
     "remoteUser": "vscode",
-    "postCreateCommand": "sudo chown -R vscode:vscode /workspace",
     "shutdownAction": "stopCompose",
     "customizations": {
         "vscode": {
