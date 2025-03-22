@@ -1,34 +1,78 @@
-# Run Flask Application + MySQL
+# Dockerfile Optimization
 
-1. Open the terminal inside the container and run:
-    ```bash
-    flask run --host=0.0.0.0 --port=5000
-    ```
+## 1. How to Optimize Dockerfile
 
-2. Open a browser and go to [http://localhost:5000](http://localhost:5000) to see "Hello, World with flask + MySQL!".
+### 1.1 Reduce Unnecessary Layers
+Combine multiple RUN commands into one. This makes fewer image layers and reduces image size.
 
-3. Open a new terminal and run the following commands to get the users from the database:
-    ```bash
-    curl -X GET http://localhost:5000/getUsers
-    ```
+```dockerfile
+RUN apt-get update && apt-get install -y \
+    package1 \
+    package2 \
+    package3
+```
 
-    Example Outputs:
-    ```json
-    {"users":[{"id":1,"name":"Alice"},{"id":2,"name":"Bob"},{"id":3,"name":"Charlie"}]}
-    ```
+### 1.2 Use Cache Effectively
+Place commands that change frequently (like COPY . .) at the end of the Dockerfile. This helps Docker cache earlier steps and speeds up builds.
 
-# Running Pytest
+### 1.3 Use Multi-Stage Build
+Build your app in one stage and copy only what you need to the final image. This makes the image smaller and cleaner.
 
-1. Inside the container, run:
-    ```bash
-    pytest
-    ```
+```dockerfile
+# Build stage
+FROM python:3.11 AS build
+WORKDIR /app
+COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
 
-2. If the test passes, you should see:
-    ```bash
-    === test session starts =======================
-    collected 1 item
+# Final image
+FROM python:3.11-slim
+WORKDIR /app
+COPY --from=build /app /app
+CMD ["python", "app.py"]
+```
 
-    src/test_app.py .                        [100%]
-    === 1 passed in 0.12 seconds ==================
-    ```
+
+## 2. How to Check the Optimization Results
+
+### 2.1 Check Image Size
+
+Use docker images to compare image sizes before and after optimization.
+
+```bash
+$ docker images flask_app
+
+REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+flask_app        before    6d1e104f7809   2025-03-22       1.58GB
+flask_app        after     2e363d04d47b   2025-03-22       331MB
+```
+
+### 2.2 Check Image Layers
+Use docker inspect and jq to see the layers in the image. Fewer layers usually mean a simpler image.
+
+```bash
+$ docker inspect flask_app:before | jq '.[0].RootFS.Layers'
+$ docker inspect flask_app:after | jq '.[0].RootFS.Layers'
+```
+
+Before Sample: 20 layers
+```json
+[
+  "sha256:01c9a2a5f237...",
+  "sha256:f8217d7865d2...",
+  "sha256:4b017a36fd9c...",
+  "sha256:d4a8a80ff53d..."
+  ...
+  "sha256:aa903d14fe74..."
+]
+```
+
+After Sample: 9 layers
+```json
+[
+  "sha256:1287fbecdfcc...",
+  "sha256:e2f88fe30c9c...",
+  ...
+  "sha256:c0fe499df8e8..."
+]
+```
