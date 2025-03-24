@@ -1,4 +1,4 @@
-FROM python:3.11-slim as build
+FROM python:3.11-slim AS build
 
 WORKDIR /workspace/src
 
@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
 
 FROM python:3.11-slim
 
+WORKDIR /workspace
+
 RUN apt-get update && apt-get install -y \
     default-libmysqlclient-dev \
     git \
@@ -20,7 +22,11 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=build /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 COPY --from=build /usr/local/bin/ /usr/local/bin/
-COPY --from=build /workspace/src /workspace/src
+COPY --from=build /workspace/src ./src
 
-RUN useradd -m vscode && chown -R vscode:vscode /workspace
+RUN useradd -m vscode && \
+    chown -R vscode:vscode /workspace
+USER vscode
+
+WORKDIR /workspace/src
 EXPOSE 5000
