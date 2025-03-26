@@ -2,8 +2,7 @@
     "name": "playground-flask-mysql-optimize",
     "dockerComposeFile": "./docker-compose.yml",
     "service": "app",
-    "forwardPorts": [5000],
-    "workspaceFolder": "/workspace",
+    "workspaceFolder": "/workspace/src",
     "remoteUser": "vscode",
     "shutdownAction": "stopCompose",
     "customizations": {
