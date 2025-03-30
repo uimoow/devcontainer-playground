@@ -27,6 +27,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install make
+      run: |
+        apt-get update
+        apt-get install -y make
+
     - name: Create .env file from secrets
       run: |
         echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> .devcontainer/.env
