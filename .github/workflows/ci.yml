@@ -20,6 +20,9 @@ jobs:
           - 3306
         options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=5
 
+    container:
+      image: python:3.11-slim
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2

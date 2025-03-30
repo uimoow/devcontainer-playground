@@ -9,4 +9,4 @@ logs:
 ps:
 	docker compose -f .devcontainer/docker-compose.yml ps
 test:
-	docker compose -f .devcontainer/docker-compose.yml exec -T app pytest /workspace/src --cache-clear
+	docker compose -f .devcontainer/docker-compose.yml exec -T --user root app pytest /workspace/src
