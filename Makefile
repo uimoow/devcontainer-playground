@@ -10,3 +10,5 @@ ps:
 	docker compose -f .devcontainer/docker-compose.yml ps
 test:
 	docker compose -f .devcontainer/docker-compose.yml exec -T --user root app pytest /workspace/src
+lint:
+	docker compose -f .devcontainer/docker-compose.yml exec -T --user root app flake8 /workspace/src
