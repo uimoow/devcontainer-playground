@@ -1,5 +1,5 @@
 {
-    "name": "playground-flask-mysql-optimize",
+    "name": "playground-ci-lint",
     "dockerComposeFile": "./docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspace/src",
@@ -8,7 +8,11 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "terminal.integrated.defaultProfile.linux": "bash"
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.linting.enabled": true,
+                "python.linting.flake8Enabled": true,
+                "python.linting.lintOnSave": true,
+                "python.linting.flake8Path": "/usr/local/bin/flake8"
             },
             "extensions": [
                 "ms-python.python",
