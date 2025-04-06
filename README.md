@@ -3,7 +3,7 @@
 ## CI with GitHub Actions & Makefile
 
 This branch introduces **Continuous Integration (CI)** using GitHub Actions, and simplifies command-line operations with a `Makefile`.  
-The Devcontainer named playground-ci.
+The Devcontainer named `playground-ci`.
 
 ### CI Overview
 
