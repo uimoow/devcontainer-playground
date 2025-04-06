@@ -1,9 +1,17 @@
-# Dockerfile Optimization: Steps & Checkpoints
+# devcontainer-playground
 
-## 1. How to Optimize Dockerfile
+## Optimized Devcontainer Setup
+This branch improves the development container setup by optimizing the Dockerfile and Docker Compose configuration for better build performance, runtime behavior, and maintainability.  
+The Devcontainer named playground-flask-mysql-optimize.
 
-### 1.1 Reduce Unnecessary Layers
-Combine multiple RUN commands into one. This makes fewer image layers and reduces image size.
+### Steps & Checkpoints
+
+#### 1. How to Optimize Dockerfile
+
+##### 1.1 Reduce Unnecessary Layers
+
+Combine multiple RUN commands into one.  
+This makes fewer image layers and reduces image size.
 
 ```dockerfile
 RUN apt-get update && apt-get install -y \
@@ -12,11 +20,15 @@ RUN apt-get update && apt-get install -y \
     package3
 ```
 
-### 1.2 Use Cache Effectively
-Place commands that change frequently (like COPY . .) at the end of the Dockerfile. This helps Docker cache earlier steps and speeds up builds.
+##### 1.2 Use Cache Effectively
 
-### 1.3 Use Multi-Stage Build
-Build your app in one stage and copy only what you need to the final image. This makes the image smaller and cleaner.
+Place commands that change frequently (like COPY . .) at the end of the Dockerfile.  
+This helps Docker cache earlier steps and speeds up builds.
+
+##### 1.3 Use Multi-Stage Build
+
+Build your app in one stage and copy only what you need to the final image.  
+This makes the image smaller and cleaner.
 
 ```dockerfile
 # Build stage
@@ -32,9 +44,9 @@ COPY --from=build /app /app
 CMD ["python", "app.py"]
 ```
 
-## 2. Try the Optimized Dockerfile
+#### 2. Try the Optimized Dockerfile
 
-### 2.1 Build Docker Images
+##### 2.1 Build Docker Images
 Build the images before and after optimization.
 
 ```bash
@@ -57,9 +69,9 @@ $ git checkout feature/flask_mysql_optimize
 $ docker build -t flask_app:after -f Dockerfile ..
 ```
 
-## 3. How to Check the Optimization Results
+#### 3. How to Check the Optimization Results
 
-### 3.1 Check Image Size
+##### 3.1 Check Image Size
 
 Use docker images to compare image sizes before and after optimization.
 
@@ -71,8 +83,9 @@ flask_app        before    6d1e104f7809   2025-03-22       1.58GB
 flask_app        after     2e363d04d47b   2025-03-22       331MB
 ```
 
-### 3.2 Check Image Layers
-Use docker inspect and jq to see the layers in the image. Fewer layers usually mean a simpler image.
+##### 3.2 Check Image Layers
+Use docker inspect and jq to see the layers in the image.  
+Fewer layers usually mean a simpler image.
 
 ```bash
 $ docker inspect flask_app:before | jq '.[0].RootFS.Layers'
