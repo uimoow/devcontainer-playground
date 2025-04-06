@@ -1,4 +1,20 @@
-# Run Flask Application
+# devcontainer-playground
+
+## Flask App + Extensions
+
+This branch expands setup by adding:
+
+- A simple **Flask application**
+- A **test script** using `pytest`
+- Several **VS Code extensions** for Python and Flask development
+- **Port forwarding** and `FLASK_APP` environment setup
+- A basic `requirements.txt` with Flask and pytest
+
+It aims to create a functional Python web development environment inside the Devcontainer.
+
+### How to Run
+
+#### Run Flask Application
 
 1. Open the terminal inside the container and run:
     ```bash
@@ -7,7 +23,7 @@
 
 2. Open a browser and go to http://localhost:5000 to see "Hello, World!".
 
-# Running Pytest
+#### Running Pytest
 
 1. Inside the container, run:
     ```bash
