@@ -18,7 +18,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
-    return 'Hello, World with flask + MySQL!'
+    return 'Hello, World with flask + MySQL.'
 
 
 @app.route('/getUsers', methods=['GET'])
