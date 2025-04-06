@@ -10,7 +10,7 @@ This branch expands setup by adding:
 - **Port forwarding** and `FLASK_APP` environment setup
 - A basic `requirements.txt` with Flask and pytest
 
-The Devcontainer named playground-flask.  
+The Devcontainer named `playground-flask`.  
 It aims to create a functional Python web development environment inside the Devcontainer.
 
 ### How to Run
