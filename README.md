@@ -1,79 +1,39 @@
-## Env Setup (with Makefile)
+# devcondevcontainer-playground
 
-You can use `make` commands to start the app, run tests, and stop the containers.
+## CI with GitHub Actions & Makefile
 
-### 1. Build Docker containers
+This branch introduces **Continuous Integration (CI)** using GitHub Actions, and simplifies command-line operations with a `Makefile`.  
+The Devcontainer named playground-ci.
 
-```bash
-make build
-```
+### CI Overview
 
-### 2. Start the app (Flask + MySQL)
+- Uses `pytest` to run unit tests inside a container
+- Triggered on:
+  - `push` or `pull_request` to any branch
+- CI workflow is defined in `.github/workflows/ci.yaml`
 
-```bash
-make up
-```
+### Makefile Commands
 
-### 3. Run tests
+A `Makefile` was added to streamline development commands.
 
-```bash
-make test
-```
+| Command        | Description                    |
+|----------------|--------------------------------|
+| `make build`   | Build containers               |
+| `make up`      | Start containers               |
+| `make test`    | Run tests with `pytest`        |
+| `make down`    | Stop and remove containers     |
 
-### 4. Stop the app
-
-```bash
-make down
-```
-
-### Optional Make Commands
+#### Optional Make Commands
 
 These are helpful for debugging.
 
-#### Check container logs
+| Command       | Description                       |
+|---------------|-----------------------------------|
+| `make logs`   | Show container logs               |
+| `make ps`     | Show container status             |
 
-```bash
-make logs
-```
+#### Why It Matters
 
-#### Show container status
-
-```bash
-make ps
-```
-
-## CI Setup (GitHub Actions)
-
-This project uses **GitHub Actions** to run tests automatically when you push to the `feature/ci` branch.
-
-### CI Steps:
-
-1. **MySQL** service is started using Docker.
-2. A `.env` file is created from GitHub Secrets.
-3. Docker containers are built and started.
-4. Tests are run using `pytest`.
-5. Containers are stopped after tests.
-
-### Trigger:
-
-- Push to `feature/ci`
-- Or run manually from GitHub (`workflow_dispatch`)
-
-### CI Workflow file: `.github/workflows/ci.yaml`
-
-```yaml
-on:
-  push:
-    branches:
-      - feature/ci
-  workflow_dispatch:
-```
-
-The job runs these steps:
-
-```bash
-make build
-make up
-make test
-make down
-```
+- Ensures tests always run in a consistent environment (container-based)
+- Detects issues before merging code
+- Saves time and reduces manual steps
