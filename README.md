@@ -2,7 +2,7 @@
 
 ## Optimized Devcontainer Setup
 This branch improves the development container setup by optimizing the Dockerfile and Docker Compose configuration for better build performance, runtime behavior, and maintainability.  
-The Devcontainer named playground-flask-mysql-optimize.
+The Devcontainer named `playground-flask-mysql-optimize`.
 
 ### Steps & Checkpoints
 
