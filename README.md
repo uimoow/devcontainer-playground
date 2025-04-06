@@ -1,116 +1,55 @@
-## Env Setup (with Makefile)
+# devcondevcontainer-playground
 
-You can use `make` commands to start the app, run tests, and stop the containers.
+## add lint
 
-### 1. Build Docker containers
+This branch focuses on integrating linting into the Continuous Integration (CI) process.  
+The main additions include:
 
-```bash
-make build
-```
+- **Makefile**: Added a make lint command to run linting checks on the project files.
+- **GitHub Actions**: Introduced a new lint.yml workflow to trigger linting checks during the CI process.
 
-### 2. Start the app (Flask + MySQL)
+These changes aim to automate code quality checks and enforce consistent coding standards across the project.  
+The Devcontainer named `playground-ci-lint`.
 
-```bash
-make up
-```
+### CI Overview (with Linting)
 
-### 3. Run tests
+- Uses `flake8` to run linting checks on the code
+- Triggered on:
+  - `push` or `pull_request` to `feature/ci_linter`
+- CI workflow is defined in `.github/workflows/lint.yml`
 
-```bash
-make test
-```
-■ Note:
-By default, make test runs pytest inside the app container using docker compose exec.
-In CI environments, the -T option is automatically used to disable pseudo-TTY allocation (for smoother automated runs).
+### Makefile Commands
+
+A `Makefile` was added to streamline development commands.
+
+| Command        | Description                    |
+|----------------|--------------------------------|
+| `make build`   | Build containers               |
+| `make up`      | Start containers               |
+| `make test`    | Run tests with `pytest`        |
+| `make down`    | Stop and remove containers     |
+| `make lint`    | Run linting checks             |
+
+#### Note:
+By default, make test runs pytest inside the app container using docker compose exec.  
+In CI environments, the -T option is automatically used to disable pseudo-TTY allocation (for smoother automated runs).  
 If you're running this locally and want to run interactively, you can add the -it option like this:
 
 ```bash
 make test EXEC_OPTS="-it"
 ```
 
-### 4. Run lint check
-
-```bash
-make lint
-```
-
-### 5. Stop the app
-
-```bash
-make down
-```
-
-### Optional Make Commands
+#### Optional Make Commands
 
 These are helpful for debugging.
 
-#### Check container logs
+| Command       | Description                       |
+|---------------|-----------------------------------|
+| `make logs`   | Show container logs               |
+| `make ps`     | Show container status             |
 
-```bash
-make logs
-```
+#### Why It Matters
 
-#### Show container status
-
-```bash
-make ps
-```
-
-## CI Setup (GitHub Actions)
-
-This project uses **GitHub Actions** to run tests and lint checks automatically.
-
-### CI Steps:
-
-1. **MySQL** service is started using Docker.
-2. A `.env` file is created from GitHub Secrets.
-3. Docker containers are built and started.
-4. Tests are run using `pytest`.
-5. Lint checks are performed using `flake8`.
-6. Containers are stopped after tests and lint checks.
-
-### Trigger:
-
-- Push to `feature/ci_linter` or `feature/ci` branches
-- Or run manually from GitHub (`workflow_dispatch`)
-
-### CI Workflow file: `.github/workflows/ci.yaml`（pytest）
-
-```yaml
-on:
-  push:
-    branches:
-      - feature/ci
-  workflow_dispatch:
-```
-
-The job runs these steps:
-
-```bash
-make build
-make up
-make test
-make down
-```
-
-### CI Workflow file: `.github/workflows/lint.yaml` (Lint Check - `flake8`)
-
-```yaml
-on:
-  push:
-    branches:
-      - feature/ci_linter
-    paths:
-      - '**.py'
-  pull_request:
-    paths:
-      - '**.py'
-  workflow_dispatch:
-```
-
-The job runs these steps:
-
-```bash
-make build
-make lint
-```
+- Ensures tests always run in a consistent environment (container-based)
+- Detects issues before merging code
+- Saves time and reduces manual steps
