@@ -9,7 +9,7 @@ Introducing Docker Compose to manage multi-container environments
 - Using an external .env file for local environment variable management
 - Installing necessary MySQL client dependencies in the Flask app container
 
-The Devcontainer named playground-flask-mysql.
+The Devcontainer named `playground-flask-mysql`.
 This is a realistic setup for developing and testing full-stack web apps locally.
 
 ### Notes
