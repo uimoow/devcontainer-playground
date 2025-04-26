@@ -13,3 +13,12 @@ Detailed instructions and processes are documented in the README for each branch
 | [**feature/dockerfile-optimize**](https://github.com/uimoow/devcontainer-playground/tree/feature/dockerfile-optimize) | Optimize the Dockerfile | Optimize the Dockerfile to reduce build time and image size. |
 | [**feature/ci**](https://github.com/uimoow/devcontainer-playground/tree/feature/ci) | Set up Continuous Integration (CI) for automated testing with GitHub Actions | Configure GitHub Actions to run automated tests in a CI pipeline. |
 | [**feature/ci_linter**](https://github.com/uimoow/devcontainer-playground/tree/feature/ci_linter) | Integrate a linter for static code analysis | Integrate flake8 into CI for static code analysis and maintaining code quality. |
+
+## Environment
+
+This repository has been tested in the following environment:
+
+- **WSL**: Ubuntu 22.04.5 LTS
+- **Docker**: Docker version 28.0.1
+- **Dev Container**: Visual Studio Code (VSCode) with the Remote-Containers extension
+- **Make**: GNU Make version 4.3
